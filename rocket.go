@@ -37,7 +37,7 @@ func (rocket *RocketClient) Get(endpoint string) (string, error) {
 
 // Platforms endpoint.
 func (rocket *RocketClient) Platforms() string {
-	response, _ := rocket.Get("data/platformsssss")
+	response, _ := rocket.Get("data/platforms")
 	return response
 }
 
