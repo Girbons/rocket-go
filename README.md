@@ -1,5 +1,7 @@
 # Rocket League Stats
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/Girbons/rocket-go)](https://goreportcard.com/report/github.com/Girbons/rocket-go)
+
 ![RLS Logo](/img/rls_partner_horizontal_large.png)
 
 ## Setup
