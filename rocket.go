@@ -29,59 +29,59 @@ func (rocket *RocketClient) PrepareRequest(endpoint string) *http.Request {
 }
 
 // Get make the request.
-func (rocket *RocketClient) Get(endpoint string) (string, error) {
+func (rocket *RocketClient) Get(endpoint string) (*Response, error) {
 	request := rocket.PrepareRequest(fmt.Sprintf("%s%s", API_ENDPOINT, endpoint))
 	response, err := rocket.Client.Do(request)
 	return handleResponse(response, err)
 }
 
 // Platforms endpoint.
-func (rocket *RocketClient) Platforms() string {
+func (rocket *RocketClient) Platforms() *Response {
 	response, _ := rocket.Get("data/platforms")
 	return response
 }
 
 // Seasons endpoint.
-func (rocket *RocketClient) Seasons() string {
+func (rocket *RocketClient) Seasons() *Response {
 	response, _ := rocket.Get("data/seasons")
 	return response
 }
 
 // Playlists endpoint.
-func (rocket *RocketClient) Playlists() string {
+func (rocket *RocketClient) Playlists() *Response {
 	response, _ := rocket.Get("data/playlists")
 	return response
 }
 
 // Tiers endpoint.
-func (rocket *RocketClient) Tiers() string {
+func (rocket *RocketClient) Tiers() *Response {
 	response, _ := rocket.Get("data/tiers")
 	return response
 }
 
 // Player info endpoint.
-func (rocket *RocketClient) Player(id, platform int) string {
-	playerEndpoint := fmt.Sprintf("player?unique_id=%d&platform_id=%d", id, platform)
+func (rocket *RocketClient) Player(id string, platform int) *Response {
+	playerEndpoint := fmt.Sprintf("player?unique_id=%s&platform_id=%d", id, platform)
 	response, _ := rocket.Get(playerEndpoint)
 	return response
 }
 
 // SearchPlayers endpoint.
-func (rocket *RocketClient) SearchPlayers(name string) string {
+func (rocket *RocketClient) SearchPlayers(name string) *Response {
 	searchPlayersEndpoint := fmt.Sprintf("search/players?display_name=%s", name)
 	response, _ := rocket.Get(searchPlayersEndpoint)
 	return response
 }
 
 // RankedLeaderboard endpoint.
-func (rocket *RocketClient) RankedLeaderboard(id int) string {
+func (rocket *RocketClient) RankedLeaderboard(id int) *Response {
 	rankedLeaderboardEndpoint := fmt.Sprintf("leaderboard/ranked?playlist_id=%d", id)
 	response, _ := rocket.Get(rankedLeaderboardEndpoint)
 	return response
 }
 
 //StatLeaderboard endpoint.
-func (rocket *RocketClient) StatLeaderboard(statType string) string {
+func (rocket *RocketClient) StatLeaderboard(statType string) *Response {
 	statLeaderboardEndpoint := fmt.Sprintf("leaderboard/stat?type=%s", statType)
 	response, _ := rocket.Get(statLeaderboardEndpoint)
 	return response

@@ -1,7 +1,6 @@
 package rocket
 
 import (
-	"fmt"
 	"io/ioutil"
 	"net/http"
 )
@@ -12,6 +11,7 @@ type Response struct {
 	Error       error
 	Message     string
 	StatusCode  int
+	Content     string
 	RawResponse *http.Response
 }
 
@@ -27,31 +27,34 @@ func buildResponse(resp *http.Response, err error) (*Response, error) {
 		Message:     resp.Status,
 		StatusCode:  resp.StatusCode,
 		RawResponse: resp,
+		Content:     "",
 	}
 
 	return response, nil
 }
 
 // handleResponse build the response and return the parsed one.
-func handleResponse(response *http.Response, err error) (string, error) {
+func handleResponse(response *http.Response, err error) (*Response, error) {
 	evaluatedResponse, resErr := buildResponse(response, err)
 
 	if evaluatedResponse.Ok != true {
-		return fmt.Sprintf(`{"status_code": %d, "message": "%s"}`, evaluatedResponse.StatusCode, evaluatedResponse.Message), nil
+		return evaluatedResponse, err
 	}
+	parseContent(evaluatedResponse, resErr)
 
-	return parseResponse(evaluatedResponse, resErr)
+	return evaluatedResponse, resErr
 }
 
 // parseResponse check if the response is ok and return the body parsed.
-func parseResponse(response *Response, err error) (string, error) {
+func parseContent(response *Response, err error) (*Response, error) {
 	defer response.RawResponse.Body.Close()
 
 	responseBody, parsErr := ioutil.ReadAll(response.RawResponse.Body)
 	if parsErr != nil {
-		msg := fmt.Sprintf("cannot read response body")
-		return msg, parsErr
+		response.Content = "cannot read response body"
+		return response, parsErr
 	}
+	response.Content = string(responseBody)
 
-	return string(responseBody), nil
+	return response, nil
 }
