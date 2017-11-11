@@ -1,5 +1,6 @@
 # Rocket League Stats
 
+[![Build Status](https://travis-ci.org/Girbons/rocket-go.svg?branch=master)](https://travis-ci.org/Girbons/rocket-go)
 [![Go Report Card](https://goreportcard.com/badge/github.com/Girbons/rocket-go)](https://goreportcard.com/report/github.com/Girbons/rocket-go)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
