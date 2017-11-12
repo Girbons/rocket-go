@@ -30,8 +30,8 @@ import (
 
 func main() {
     client := rocket.NewClient("API_KEY")
-    response := client.Player(userId string, platform id int)
-    fmt.Println(response.Content)
+    response := client.Player("76561198079681869", 1)
+    fmt.Println(response.Content())
 }
 ```
 

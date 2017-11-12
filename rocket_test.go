@@ -33,7 +33,7 @@ func TestPlatform(t *testing.T) {
 	time.Sleep(time.Second * 5)
 	response := client.Platforms()
 	assert.Equal(t, 200, response.StatusCode)
-	assert.Equal(t, `[{"id":1,"name":"Steam"},{"id":2,"name":"Ps4"},{"id":3,"name":"XboxOne"}]`, response.Content)
+	assert.Equal(t, `[{"id":1,"name":"Steam"},{"id":2,"name":"Ps4"},{"id":3,"name":"XboxOne"}]`, response.Content())
 }
 
 func TestSeasons(t *testing.T) {

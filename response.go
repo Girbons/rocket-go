@@ -11,7 +11,6 @@ type Response struct {
 	Error       error
 	Message     string
 	StatusCode  int
-	Content     string
 	RawResponse *http.Response
 }
 
@@ -27,7 +26,6 @@ func buildResponse(resp *http.Response, err error) (*Response, error) {
 		Message:     resp.Status,
 		StatusCode:  resp.StatusCode,
 		RawResponse: resp,
-		Content:     "",
 	}
 
 	return response, nil
@@ -40,21 +38,18 @@ func handleResponse(response *http.Response, err error) (*Response, error) {
 	if evaluatedResponse.Ok != true {
 		return evaluatedResponse, err
 	}
-	parseContent(evaluatedResponse, resErr)
 
 	return evaluatedResponse, resErr
 }
 
-// parseResponse check if the response is ok and return the body parsed.
-func parseContent(response *Response, err error) (*Response, error) {
+// Content return parsed body.
+func (response *Response) Content() string {
 	defer response.RawResponse.Body.Close()
 
 	responseBody, parsErr := ioutil.ReadAll(response.RawResponse.Body)
 	if parsErr != nil {
-		response.Content = "cannot read response body"
-		return response, parsErr
+		return "Cannot read body"
 	}
-	response.Content = string(responseBody)
 
-	return response, nil
+	return string(responseBody)
 }
