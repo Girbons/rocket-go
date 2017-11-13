@@ -23,6 +23,7 @@ func TestPrepareRequest(t *testing.T) {
 }
 
 func TestRocketGet(t *testing.T) {
+	// To avoid 429 TOO MANY REQUESTS
 	time.Sleep(time.Second * 5)
 	response, _ := client.Get("data/platforms")
 	assert.Equal(t, response.Ok, true)
@@ -30,6 +31,7 @@ func TestRocketGet(t *testing.T) {
 }
 
 func TestPlatform(t *testing.T) {
+	// To avoid 429 TOO MANY REQUESTS
 	time.Sleep(time.Second * 5)
 	response := client.Platforms()
 	assert.Equal(t, 200, response.StatusCode)
@@ -37,42 +39,49 @@ func TestPlatform(t *testing.T) {
 }
 
 func TestSeasons(t *testing.T) {
+	// To avoid 429 TOO MANY REQUESTS
 	time.Sleep(time.Second * 5)
 	response := client.Seasons()
 	assert.Equal(t, 200, response.StatusCode)
 }
 
 func TestPlaylists(t *testing.T) {
+	// To avoid 429 TOO MANY REQUESTS
 	time.Sleep(time.Second * 5)
 	response := client.Playlists()
 	assert.Equal(t, 200, response.StatusCode)
 }
 
 func TestTiers(t *testing.T) {
+	// To avoid 429 TOO MANY REQUESTS
 	time.Sleep(time.Second * 5)
 	response := client.Tiers()
 	assert.Equal(t, 200, response.StatusCode)
 }
 
 func TestPlayer(t *testing.T) {
+	// To avoid 429 TOO MANY REQUESTS
 	time.Sleep(time.Second * 5)
 	response := client.Player("76561198079681869", 1)
 	assert.Equal(t, 200, response.StatusCode)
 }
 
 func TestSearchPlayers(t *testing.T) {
+	// To avoid 429 TOO MANY REQUESTS
 	time.Sleep(time.Second * 5)
 	response := client.SearchPlayers("Girbons")
 	assert.Equal(t, 200, response.StatusCode)
 }
 
 func TestRankedLeaderboard(t *testing.T) {
+	// To avoid 429 TOO MANY REQUESTS
 	time.Sleep(time.Second * 5)
 	response := client.RankedLeaderboard(10)
 	assert.Equal(t, 200, response.StatusCode)
 }
 
 func TestStatLeaderboard(t *testing.T) {
+	// To avoid 429 TOO MANY REQUESTS
 	time.Sleep(time.Second * 5)
 	response := client.StatLeaderboard("wins")
 	assert.Equal(t, 200, response.StatusCode)
