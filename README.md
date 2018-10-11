@@ -1,3 +1,7 @@
+# Warning
+
+https://rocketleaguestats.com/ has been closed so this repository will be archived.
+
 # Rocket League Stats
 
 [![Build Status](https://travis-ci.org/Girbons/rocket-go.svg?branch=master)](https://travis-ci.org/Girbons/rocket-go)
